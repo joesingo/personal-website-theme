@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/static/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+
+    {% for i in stylesheets %}
+    <link rel="stylesheet" href="{{ i }}" />
+    {% endfor %}
+
+    {% for i in js_scripts %}
+    <script src="{{ i }}"></script>
+    {% endfor %}
+
+    <style type="text/css">
+        #main-nav {
+            margin-bottom: 0;
+        }
+        article {
+            font-size: 18px;
+        }
+        .site-index {
+            font-size: 20px;
+        }
+        .breadcrumb {
+            border: 1px solid #e7e7e7;
+        }
+        p {
+            margin-bottom: 1.05em;
+        }
+        img {
+            display: block;
+            margin: auto;
+        }
+        {% for i in extra_style %}
+        {{ i }}
+        {% endfor %}
+    </style>
+
+    {% for i in extra_head %}
+    {{ i }}
+    {% endfor %}
+</head>
+
+<body>
+    <nav id="main-nav" class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">{{ sitename|default("My Website") }}</a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                {% for item in sitemap %}
+
+                    {% if item.children %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                           role="button" aria-haspopup="true" aria-expanded="false">
+                            {{ item.title }}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ item.path }}">{{ item.title }}</a></li>
+                            {% for subitem in item.children %}
+                            <li><a href="{{ subitem.path }}">{{ subitem.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+                    {% else %}
+                    <li><a href="{{ item.path }}">{{ item.title }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <ol class="breadcrumb">
+    {% for page in breadcrumbs %}
+        {% if loop.last %}
+        <li class="active">{{ page.title }}</li>
+        {% else %}
+        <li><a href="{{ page.path }}">{{ page.title }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ol>
+
+    {% for i in extra_body %}
+    {{ i }}
+    {% endfor %}
+
+    <div class="container" itemscope itemtype="http://schema.org/Blog">
+        <h1 itemprop="headline">{{ title }}</h1>
+        <article itemprop="text">
+            {{ content }}
+        </article>
+
+        <hr />
+
+        {% if children %}
+            <ul class="site-index">
+            {% for item in children recursive %}
+                <li><a href="{{ item.path }}">{{ item.title }}</a></li>
+                {% if item.children %}
+                    <ul class="collapsable">{{ loop(item.children) }}</ul>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        <div style="display: none;" itemprop="keywords">{{ ",".join(keywords) }}</div>
+    </div>
+</body>
+
+</html>
