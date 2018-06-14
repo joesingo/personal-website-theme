@@ -11,6 +11,7 @@
     <script type="text/javascript" src="/static/js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="/static/css/page.css" />
     {% for i in stylesheets %}
     <link rel="stylesheet" href="{{ i }}" />
     {% endfor %}
@@ -20,33 +21,6 @@
     {% endfor %}
 
     <style type="text/css">
-        #main-nav {
-            margin-bottom: 0;
-        }
-        article {
-            font-size: 18px;
-        }
-        .site-index {
-            font-size: 20px;
-        }
-        .breadcrumb {
-            border: 1px solid #e7e7e7;
-        }
-        .breadcrumb-footer {
-            background-color: inherit;
-            border: none;
-            padding-left: 0;
-        }
-        p {
-            margin-bottom: 1.05em;
-        }
-        img {
-            display: block;
-            margin: auto;
-        }
-        hr {
-            margin: 10px 0;
-        }
         {% for i in extra_style %}
         {{ i }}
         {% endfor %}
