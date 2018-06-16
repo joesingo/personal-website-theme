@@ -1,120 +1,116 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 
 <head>
+    <title>{{ title }} | {{ sitename }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ title }}</title>
-
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/static/css/page.css" />
     <link rel="stylesheet" href="/static/css/code.css" />
 
-    <script type="text/javascript" src="/static/js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+          crossorigin="anonymous">
 
-    {% for i in stylesheets %}
-    <link rel="stylesheet" href="{{ i }}" />
-    {% endfor %}
-
-    {% for i in js_scripts %}
-    <script src="{{ i }}"></script>
+    {% for s in stylesheets %}
+    <link rel="stylesheet" href="{{ s }}" />
     {% endfor %}
 
     <style type="text/css">
-        {% for i in extra_style %}
-        {{ i }}
+        {% for s in extra_style %}
+        {{ s }}
         {% endfor %}
     </style>
 
-    {% for i in extra_head %}
-    {{ i }}
+    {% for s in js_scripts %}
+    <script type="text/javascript" src="{{ s }}"></script>
     {% endfor %}
-</head>
 
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Blog",
+        {% if author %}
+        "author": "{{ author }}",
+        {% endif %}
+        {% if base_url %}
+        {% set url = base_url[:-1] if base_url.endswith('/') else base_url %}
+        "identifier": "{{ url }}{{ breadcrumbs[-1].path }}",
+        {% endif %}
+        "headline": "{{ title }}",
+        "keywords": "{{ ",".join(keywords) }}"
+    }
+    </script>
+
+    {% if schema_org_dict %}
+    <script type="application/ld+json">{{ schema_org_dict|tojson }}</script>
+    {% endif %}
+
+    {{ extra_head }}
+
+</head>
 <body>
-    <nav id="main-nav" class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a href="/" class="navbar-brand">{{ sitename|default("My Website") }}</a>
+    <header>
+        <div id="header-content">
+            <div>
+                <h1>
+                    <a href="/">
+                        <i class="fas fa-{{ fa_icon|default("lemon") }} site-icon"></i>
+                        {{ sitename|default("My Website") }}
+                    </a>
+                </h1>
+
+                <nav>
+                    <ul class="nav-links flat-list">
+                        {% for p in sitemap %}
+                        <li>
+                            <a href="{{ p.path }}" title="{{ p.title }}">
+                                {{ p.title }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
             </div>
 
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                {% for item in sitemap %}
+            {% if breadcrumbs|length > 1 %}
+                <div id="top-breadcrumbs">
+                    {% include "breadcrumbs.html" %}
+                </div>
+            {% endif %}
+        </div>
+    </header>
 
-                    {% if item.children %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                           role="button" aria-haspopup="true" aria-expanded="false">
-                            {{ item.title }}
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ item.path }}">{{ item.title }}</a></li>
-                            {% for subitem in item.children %}
-                            <li><a href="{{ subitem.path }}">{{ subitem.title }}</a></li>
-                            {% endfor %}
+    <div id="mdss-content">
+        <h1>{{ title }}</h1>
+        {{ content }}
+
+        {% if children %}
+            <div id="children">
+                <h2>Sub-pages</h2>
+                <ul>
+                {% for c in children recursive %}
+                    <li>
+                        <a href="{{ c.path }}" title="{{ c.title }}">{{ c.title }}</a>
+                        {% if c.children %}
+                        <ul>
+                            {{ loop(c.children) }}
                         </ul>
+                        {% endif %}
                     </li>
-
-                    {% else %}
-                    <li><a href="{{ item.path }}">{{ item.title }}</a></li>
-                    {% endif %}
                 {% endfor %}
                 </ul>
             </div>
-        </div>
-    </nav>
-
-    <ol class="breadcrumb">
-    {% for page in breadcrumbs %}
-        {% if loop.last %}
-        <li class="active">{{ page.title }}</li>
-        {% else %}
-        <li><a href="{{ page.path }}">{{ page.title }}</a></li>
-        {% endif %}
-    {% endfor %}
-    </ol>
-
-    {% for i in extra_body %}
-    {{ i }}
-    {% endfor %}
-
-    <div class="container" itemscope itemtype="http://schema.org/Blog">
-        <h1 itemprop="headline">{{ title }}</h1>
-        <article itemprop="text">
-            {{ content }}
-        </article>
-
-        {% if children %}
-            <hr />
-            <ul class="site-index">
-            {% for item in children recursive %}
-                <li><a href="{{ item.path }}">{{ item.title }}</a></li>
-                {% if item.children %}
-                    <ul class="collapsable">{{ loop(item.children) }}</ul>
-                {% endif %}
-            {% endfor %}
-            </ul>
         {% endif %}
 
         {% if breadcrumbs|length > 1 %}
-            <hr />
-            <ol class="breadcrumb breadcrumb-footer">
-            {% for page in breadcrumbs %}
-                {% if loop.last %}
-                <li class="active">{{ page.title }}</li>
-                {% else %}
-                <li><a href="{{ page.path }}">{{ page.title }}</a></li>
-                {% endif %}
-            {% endfor %}
-            </ol>
+            <div id="bottom-breadcrumbs">
+                {% include "breadcrumbs.html" %}
+            </div
         {% endif %}
-
-        <div style="display: none;" itemprop="keywords">{{ ",".join(keywords) }}</div>
     </div>
-</body>
 
+</body>
 </html>

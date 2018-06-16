@@ -1,34 +1,123 @@
-#main-nav {
-    margin-bottom: 0;
+body {
+    font-family: "Segoe UI", "Helvetica", sans-serif;
+    margin: 0;
+    padding: 1em;
+    color: #555;
 }
-article {
-    font-size: 18px;
+
+header h1 {
+    font-size: 1.25em;
+    display: inline;
 }
-.site-index {
-    font-size: 20px;
+
+header h1 a {
+    /* remove styling from home page link */
+    color: inherit;
+    text-decoration: none;
 }
-.breadcrumb {
-    border: 1px solid #e7e7e7;
+
+#header-content > div {
+    /* space between header elementsl e.g. nav links and breadcrumbs */
+    padding-bottom: 1em;
 }
-.breadcrumb-footer {
-    background-color: inherit;
-    border: none;
+
+nav {
+    display: inline;
+}
+
+nav ul {
+    /* top level nav links should be on the right side of the header */
+    float: right;
+    margin: 0;  /* required so that links align vertically with the h1 */
+}
+
+@media (max-width: 576px) {
+    nav {
+        display: none;
+    }
+}
+
+nav ul > li {
+    margin-left: 2em;
+}
+
+nav ul.nav-links li a {
+    text-decoration: none;
+}
+
+nav ul.nav-links > li a:hover {
+    text-decoration: underline;
+}
+
+#header-content, #children, #bottom-breadcrumbs {
+    border: 0 solid #dadada;
+}
+
+#header-content {
+    border-bottom-width: 1px;
+}
+
+#children, #bottom-breadcrumbs {
+    border-top-width: 1px;
+}
+
+#top-breadcrumbs {
+    padding-bottom: 1em;
+}
+
+#bottom-breadcrumbs {
+    padding-top: 1em;
+}
+
+#header-content, #mdss-content {
+    max-width: 50em;
+    margin: 0 auto;
+}
+
+#mdss-content {
+    line-height: 1.5em;
+}
+
+/* class 'flat-list' is used for top level nav and breadcrumbs */
+ul.flat-list, ul.flat-list > li {
+    display: inline;
+}
+
+.breadcrumbs {
     padding-left: 0;
+    font-size: 0.9em;
 }
-p {
-    margin-bottom: 1.05em;
+
+h1, h2, h3, h4, h5, strong {
+    color: #333;
 }
-img {
-    display: block;
-    margin: auto;
+
+pre {
+    padding: 16px;
+    overflow: auto;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
 }
-hr {
-    margin: 10px 0;
-}
+
 table {
-    margin-bottom: 2em;
+    border-collapse: collapse;
 }
-th, td {
-    padding: 0.5em;
-    border-top: 1px solid #e9ecef;
+
+td, th {
+    padding: 6px 13px;
+    border: solid 1px #dfe2e5;
+}
+
+a {
+    color: #6C8AA0;
+}
+
+a:hover {
+    color: #D46385;
+    text-decoration: none;
+}
+
+.site-icon {
+    color: #D46385;
 }
