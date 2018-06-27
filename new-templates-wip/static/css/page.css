@@ -1,23 +1,25 @@
 body {
-    font-family: "Palatino", "Georgia", serif;
+    /* font-family: "Palatino", "Georgia", serif; */
+    font-family: "Segoe UI", "Helvetica";
     margin: 0;
     padding: 0;
     color: #555;
 }
 
 header, .submenu {
-    background: #222;
+    /* background: #222; */
 }
 
 header {
-    color: white;
+    /* color: white; */
     padding: 1em;
-    font-family: "Share";
+    /* font-family: "Share"; */
 }
 
 header h1 {
-    font-size: 1.5em;
-    color: white;
+    /* font-size: 1.5em; */
+    font-size: 1.25em;
+    /* color: white; */
     margin: 0 auto 1em auto;
     display: inline;
 }
@@ -51,13 +53,13 @@ nav {
 }
 
 nav ul.nav-links > li {
-    font-size: 1.5em;
+    /* font-size: 1.5em; */
     float: right;
     margin-left: 2em;
     position: relative;
 }
 nav ul.nav-links li a {
-    color: white;
+    /* color: white; */
     text-decoration: none;
 }
 
