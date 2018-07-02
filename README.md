@@ -23,6 +23,7 @@ the following variables are used:
 | extra_head  | HTML to include at the end of the `<head>` section |
 | extra_style | CSS rules to include in a `<style>` tag |
 | fa_icon     | [Font Awesome](https://fontawesome.com/) icon displayed next to the site name in the navbar (see the [list of icons](https://fontawesome.com/icons?d=gallery). (default: lemon) |
+| favicon_url | URL to an `*.ico` file to use as site icon. Unfortunately this name is similar to `fa_icon` but is unrelated |
 | js_scripts  | List of paths to JavaScript files to include in the `<head>` section |
 | sitename    | Website name to be displayed in the navbar (default: My Website) |
 | stylesheets | List of paths to external stylesheets |
