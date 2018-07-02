@@ -19,13 +19,23 @@ the following variables are used:
 
 | Variable    | Description |
 | ----------- | ----------- |
+| extra_head  | HTML to include at the end of the `<head>` section |
 | extra_body  | HTML to include before the page content |
 | extra_style | CSS rules to include in a `<style>` tag |
 | js_scripts  | List of paths to JavaScript files to include in the `<head>` section |
-| keywords    | List of keywords for the page to be included as a [schema.org](https://schema.org) property |
 | sitename    | Website name to be displayed in the navbar (default: My Website) |
 | stylesheets | List of paths to external stylesheets |
 
-Note that all variables are optional. `sitename` should be set in the
-`default_context` section in the mdss site config to avoid repeating it on each
-page.
+The following variables are used for [schema.org](https://schema.org) markup.
+By default each page is a [Blog](https://schema.org/Blog) object.
+
+| Variable        | Description |
+| --------------- | ----------- |
+| keywords        | List of keywords for the page |
+| author          | Page author |
+| base_url        | Root URL to the location the `mdss`-generated site will be hosted. This is used to construct an absolute URL to the page |
+| schema_org_dict | A dictionary that is converted to [JSON-LD](https://developers.google.com/search/docs/guides/intro-structured-data) Schema.org markup |
+
+Note that all variables are optional. `sitename` and `base_url` should be set
+in the `default_context` section in the mdss site config to avoid repeating it
+on each page.
