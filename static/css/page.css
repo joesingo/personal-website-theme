@@ -61,6 +61,19 @@ nav ul.nav-links > li a:hover {
     border-top-width: 1px;
 }
 
+#siblings {
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+}
+
+#siblings .prev {
+    float: left;
+}
+
+#siblings .next {
+    float: right;
+}
+
 #top-breadcrumbs {
     padding-bottom: 1em;
 }

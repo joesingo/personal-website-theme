@@ -92,6 +92,29 @@
         <h1>{{ title }}</h1>
         {{ content }}
 
+        {% if siblings %}
+            <div id="siblings">
+                {% for p in siblings %}
+                    {% if loop.nextitem is defined and loop.nextitem.path == path %}
+                        <span class="prev">
+                            <i class="fa fa-chevron-left fa-sm" aria-hidden="true"></i>
+                            <a href="{{ p.path }}" title="{{ p.title }}">
+                                {{ p.title }}
+                            </a>
+                        </span>
+                    {% endif %}
+                    {% if loop.previtem is defined and loop.previtem.path == path %}
+                        <span class="next">
+                            <a href="{{ p.path }}" title="{{ p.title }}">
+                                {{ p.title }}
+                            </a>
+                            <i class="fa fa-chevron-right fa-sm" aria-hidden="true"></i>
+                        </span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
         {% if children %}
             <div id="children">
                 <h2>Sub-pages</h2>
