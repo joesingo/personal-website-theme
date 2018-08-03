@@ -21,11 +21,11 @@
     <link rel="stylesheet" href="{{ s }}" />
     {% endfor %}
 
+    {% if extra_style %}
     <style type="text/css">
-        {% for s in extra_style %}
-        {{ s }}
-        {% endfor %}
+        {{ extra_style }}
     </style>
+    {% endif %}
 
     {% for s in js_scripts %}
     <script type="text/javascript" src="{{ s }}"></script>
