@@ -27,6 +27,7 @@ the following variables are used:
 | js_scripts  | List of paths to JavaScript files to include in the `<head>` section |
 | sitename    | Website name to be displayed in the navbar (default: My Website) |
 | stylesheets | List of paths to external stylesheets |
+| date        | Date page was created/updated, as a string in any format |
 
 The following variables are used for [schema.org](https://schema.org) markup.
 By default each page is a [Blog](https://schema.org/Blog) object.

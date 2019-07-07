@@ -134,3 +134,8 @@ a:hover {
 .site-icon {
     color: #D46385;
 }
+
+p.date {
+    color: #888;
+    font-size: 0.85em;
+}
